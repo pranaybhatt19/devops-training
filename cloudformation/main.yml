@@ -2,16 +2,16 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: Main stack for EC2, Lambda, Roles
 
 Resources:
-  IAMRolesStack:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: ./roles.yml
+  # IAMRolesStack:
+  #   Type: AWS::CloudFormation::Stack
+  #   Properties:
+  #     TemplateURL: ./roles.yml
 
-  LambdaStack:
-    Type: AWS::CloudFormation::Stack
-    DependsOn: IAMRolesStack
-    Properties:
-      TemplateURL: ./lambda-deploy.yml
+  # LambdaStack:
+  #   Type: AWS::CloudFormation::Stack
+  #   DependsOn: IAMRolesStack
+  #   Properties:
+  #     TemplateURL: ./lambda-deploy.yml
 
   EC2Instance:
     Type: AWS::EC2::Instance
