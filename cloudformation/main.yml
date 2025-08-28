@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Description: Main stack for EC2, Lambda, Roles
 
 Resources:
@@ -6,7 +6,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://s3.ap-south-1.amazonaws.com/devops.training.pranay/roles.yml
-  
+
   LambdaStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: IAMRolesStack
@@ -16,9 +16,9 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0861f4e788f5069dd  # Amazon Linux 2, change if needed
+      ImageId: ami-0861f4e788f5069dd # Amazon Linux 2, change if needed
       InstanceType: t2.micro
-      KeyName: trainingkey  # Replace with your EC2 key pair name
+      KeyName: trainingkey # Replace with your EC2 key pair name
       SecurityGroups:
         - !Ref EC2SecurityGroup
       UserData:
