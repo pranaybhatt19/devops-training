@@ -7,8 +7,7 @@ phases:
   pre_build:
     commands:
       - echo Installing dependencies...
-      - apt-get update && apt-get install -y zip
-      - if [ -f lambda/requirements.txt ]; then pip install -r lambda/requirements.txt -t lambda/; fi
+      - pip install -r lambda/requirements.txt -t lambda/
   build:
     commands:
       - echo Packaging Lambda function...
@@ -21,5 +20,3 @@ phases:
 artifacts:
   files:
     - lambda.zip
-    - cloudformation/**/*
-  discard-paths: yes
