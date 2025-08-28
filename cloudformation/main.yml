@@ -5,13 +5,13 @@ Resources:
   IAMRolesStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.ap-south-1.amazonaws.com/devops.training.pranay/roles.yml
+      TemplateURL: SourceArtifact::cloudformation/roles.yml
 
   LambdaStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: IAMRolesStack
     Properties:
-      TemplateURL: https://s3.ap-south-1.amazonaws.com/devops.training.pranay/lambda-deploy.yml
+      TemplateURL: SourceArtifact::cloudformation/lambda-deploy.yml
 
   EC2Instance:
     Type: AWS::EC2::Instance
@@ -39,3 +39,5 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+
+cloudformation\main.yml
