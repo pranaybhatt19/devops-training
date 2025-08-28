@@ -7,11 +7,11 @@ phases:
   pre_build:
     commands:
       - echo Installing dependencies...
-      - pip install -r lambda/requirements.txt -t lambda/
+      - if [ -f lambda/requirements.txt ]; then pip install -r lambda/requirements.txt -t lambda/; fi
   build:
     commands:
       - echo Packaging Lambda function...
-      - cd lambda/
+      - cd lambda
       - zip -r ../lambda.zip .
       - cd ..
   post_build:
@@ -20,3 +20,4 @@ phases:
 artifacts:
   files:
     - lambda.zip
+  discard-paths: yes
