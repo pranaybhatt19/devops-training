@@ -7,13 +7,13 @@ phases:
   pre_build:
     commands:
       - echo Installing dependencies...
-      - if [ -f lambda/requirements.txt ]; then pip install -r lambda/requirements.txt -t lambda/; fi
+      # - if [ -f lambda/requirements.txt ]; then pip install -r lambda/requirements.txt -t lambda/; fi
   build:
     commands:
       - echo Packaging Lambda function...
-      - cd lambda
-      - zip -r ../lambda.zip .
-      - cd ..
+      # - cd lambda
+      - zip -r lambda.zip lambda/
+      # - cd ..
   post_build:
     commands:
       - echo Build completed.
