@@ -5,13 +5,13 @@ Resources:
   IAMRolesStack:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: SourceArtifact::cloudformation/roles.yml
+      TemplateURL: ./roles.yml
 
   LambdaStack:
     Type: AWS::CloudFormation::Stack
     DependsOn: IAMRolesStack
     Properties:
-      TemplateURL: SourceArtifact::cloudformation/lambda-deploy.yml
+      TemplateURL: ./lambda-deploy.yml
 
   EC2Instance:
     Type: AWS::EC2::Instance
