@@ -2,101 +2,16 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: Main stack for EC2, Lambda, Roles
 
 Resources:
-  # IAMRolesStack:
-  #   Type: AWS::CloudFormation::Stack
-  #   Properties:
-  #     TemplateURL: ./roles.yml
-
-  # LambdaStack:
-  #   Type: AWS::CloudFormation::Stack
-  #   DependsOn: IAMRolesStack
-  #   Properties:
-  #     TemplateURL: ./lambda-deploy.yml
-
-  CodePipelineServiceRole:
-    Type: AWS::IAM::Role
+  IAMRolesStack:
+    Type: AWS::CloudFormation::Stack
     Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: codepipeline.amazonaws.com
-            Action: sts:AssumeRole
-      Policies:
-        - PolicyName: CodePipelinePermissions
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - s3:*
-                  - codebuild:*
-                  - cloudformation:*
-                  - iam:PassRole
-                  - lambda:*
-                  - ec2:*
-                Resource: "*"
+      TemplateURL: .cloudformation/roles.yml
 
-  CodeBuildServiceRole:
-    Type: AWS::IAM::Role
+  LambdaStack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: IAMRolesStack
     Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: codebuild.amazonaws.com
-            Action: sts:AssumeRole
-      Policies:
-        - PolicyName: CodeBuildPermissions
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - s3:*
-                  - cloudformation:*
-                  - lambda:*
-                  - ec2:*
-                  - logs:*
-                Resource: "*"
-
-  LambdaExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-            Action: sts:AssumeRole
-      Policies:
-        - PolicyName: LambdaBasicExecution
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - logs:CreateLogGroup
-                  - logs:CreateLogStream
-                  - logs:PutLogEvents
-                Resource: "*"
-
-  LambdaFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      Handler: app.lambda_handler
-      Role: !GetAtt LambdaExecutionRole.Arn
-      Code:
-        S3Bucket: !Ref DeploymentBucket
-        S3Key: lambda.zip
-      Runtime: python3.9
-      Timeout: 10
-
-  DeploymentBucket:
-    Type: AWS::S3::Bucket
+      TemplateURL: .cloudformation/lambda-deploy.yml
 
   EC2Instance:
     Type: AWS::EC2::Instance

@@ -21,4 +21,5 @@ phases:
 artifacts:
   files:
     - lambda.zip
+    - cloudformation/**/*
   discard-paths: yes
