@@ -101,7 +101,7 @@ Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0861f4e788f5069dd # Amazon Linux 2, change if needed
+      ImageId: ami-0861f4e788f5069dd # Amazon Linux 2, change if neede
       InstanceType: t2.micro
       KeyName: trainingkey # Replace with your EC2 key pair name
       SecurityGroups:
