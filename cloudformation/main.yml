@@ -84,6 +84,9 @@ Resources:
                   - logs:PutLogEvents
                 Resource: "*"
 
+  DeploymentBucket:
+    Type: AWS::S3::Bucket
+
   LambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
@@ -95,8 +98,6 @@ Resources:
       Runtime: python3.9
       Timeout: 10
 
-  DeploymentBucket:
-    Type: AWS::S3::Bucket
 
   EC2Instance:
     Type: AWS::EC2::Instance
